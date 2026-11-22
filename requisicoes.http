@@ -1,0 +1,55 @@
+@baseUrl = http://localhost:3000/api
+
+### 1. Verificar se a API está online (200 OK)
+GET {{baseUrl}}/status
+
+### 2. Registrar um novo usuário (201 Created)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "novo_usuario",
+  "email": "novo@acessibilidade.com",
+  "password": "senha123"
+}
+
+### 3. Fazer Login e capturar o Token JWT automaticamente (200 OK)
+# @name loginReq
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario1@acessibilidade.com",
+  "password": "123456"
+}
+
+### Variável automática que guarda o token da requisição #3
+@token = {{loginReq.response.body.token}}
+
+### 4. Tentar acessar rota protegida SEM token (Deve retornar 401 Unauthorized)
+GET {{baseUrl}}/usuarios/me
+
+### 5. Buscar dados do próprio usuário logado COM token (200 OK)
+GET {{baseUrl}}/usuarios/me
+Authorization: Bearer {{token}}
+
+### 6. Listar todos os usuários cadastrados (200 OK)
+GET {{baseUrl}}/usuarios
+Authorization: Bearer {{token}}
+
+
+
+### 8. Testar Autorização: Tentar alterar usuário ID 2 logado como ID 1 (Deve retornar 403 Forbidden)
+PUT {{baseUrl}}/usuarios/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "username": "tentativa_bloqueada"
+}
+
+
+
+### 9. Deletar a própria conta (Usuário 1) -> Deve retornar 204 No Content
+DELETE {{baseUrl}}/usuarios/1
+Authorization: Bearer {{token}}

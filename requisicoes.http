@@ -1,22 +1,11 @@
-@baseUrl = http://localhost:3000/api
 
 
-@prodUrl = https://sensepadapi.onrender.com/api
+# --- ALTERNE A URL ATIVA COMENTANDO (#) UMA DAS LINHAS ABAIXO ---
+
+# @baseUrl = http://localhost:3000/api
+@baseUrl = https://sensepadapi.onrender.com/api
 
 
-### Checks for RENDER:
-
-### 1. Verificar se a API no Render está online (200 OK)
-GET {{prodUrl}}/status
-
-### 2. Fazer Login com um dos usuários criados pelo auto-seed (200 OK)
-POST {{prodUrl}}/auth/login
-Content-Type: application/json
-
-{
-  "email": "usuario1@acessibilidade.com",
-  "password": "123456"
-}
 
 
 

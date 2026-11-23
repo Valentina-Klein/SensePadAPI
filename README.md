@@ -2,6 +2,8 @@
 
 API RESTful desenvolvida em **Node.js**, **Express** e **SQLite** para autenticação e gerenciamento de usuários do aplicativo móvel **SensePad** (Flutter), que transforma a tela sensível ao toque do smartphone em um touchpad para computador, promovendo acessibilidade digital para pessoas com mobilidade reduzida nos membros superiores. Criada como parte de um Projeto Integrador da Universidade de Sorocaba (Uniso) para o 4º semestre do curso de Análise e Desenvolvimento de Sistemas.
 
+
+> **API Online (Render):** `https://sensepadapi.onrender.com`
 > **Repositório do App Flutter (Frontend Mobile):** `https://github.com/BelitMota/sensepad-mouse-virtual`
 
 ---
@@ -12,6 +14,7 @@ API RESTful desenvolvida em **Node.js**, **Express** e **SQLite** para autentica
 * **Framework Web:** Express
 * **Banco de Dados:** SQLite (`DatabaseSync`)
 * **Segurança:** `bcryptjs` (hash de senhas) e `jsonwebtoken` (autenticação stateless via JWT `HS256`)
+* **Hospedagem:** Render Web Service
 
 ---
 
@@ -67,16 +70,29 @@ JWT_EXPIRES_IN=8h
 DB_PATH=./dados/acessibilidade.sqlite
 ```
 
-### 3. Popular dados iniciais e iniciar o servidor
+### 3. Iniciar o servidor
 ```bash
-npm run seed
 npm start
 ```
 O servidor iniciará em `http://0.0.0`.
 
+*(O banco SQLite e os usuários iniciais são criados automaticamente na inicialização caso o banco esteja vazio).*
+
+---
+
+## Deploy e Credenciais de Teste
+
+A API está hospedada no **Render** (`https://sensepadapi.onrender.com`). Como o plano gratuito entra em modo de suspensão após 15 minutos de inatividade, a primeira requisição pode levar cerca de 30 a 50 segundos para reativar o servidor.
+
+### Contas Pré-Cadastradas (Auto-Seed)
+* **E-mails:** `usuario1@acessibilidade.com`, `usuario2@acessibilidade.com`, `admin@acessibilidade.com`
+* **Senha padrão:** `123456`
+
 ---
 
 ## Endpoints da API
+
+*(Importante: Todos os endpoints começam com /api, não existe root (/). Para obter o status da API, use /api/status.)*
 
 ### Rotas Públicas
 

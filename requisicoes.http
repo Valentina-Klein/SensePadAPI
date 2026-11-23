@@ -1,5 +1,27 @@
 @baseUrl = http://localhost:3000/api
 
+
+@prodUrl = https://sensepadapi.onrender.com/api
+
+
+### Checks for RENDER:
+
+### 1. Verificar se a API no Render está online (200 OK)
+GET {{prodUrl}}/status
+
+### 2. Fazer Login com um dos usuários criados pelo auto-seed (200 OK)
+POST {{prodUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario1@acessibilidade.com",
+  "password": "123456"
+}
+
+
+
+### Checks for normal API
+
 ### 1. Verificar se a API está online (200 OK)
 GET {{baseUrl}}/status
 
@@ -39,7 +61,7 @@ Authorization: Bearer {{token}}
 
 
 
-### 8. Testar Autorização: Tentar alterar usuário ID 2 logado como ID 1 (Deve retornar 403 Forbidden)
+### 7. Testar Autorização: Tentar alterar usuário ID 2 logado como ID 1 (Deve retornar 403 Forbidden)
 PUT {{baseUrl}}/usuarios/2
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -50,6 +72,6 @@ Content-Type: application/json
 
 
 
-### 9. Deletar a própria conta (Usuário 1) -> Deve retornar 204 No Content
+### 8. Deletar a própria conta (Usuário 1) -> Deve retornar 204 No Content
 DELETE {{baseUrl}}/usuarios/1
 Authorization: Bearer {{token}}

@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { inicializarBanco } = require("./database/conexao");
+const seed = require("./seed");
 const ErroAplicacao = require("./services/erro_aplicacao");
 
 const authRoutes = require("./routes/auth_routes");
@@ -10,8 +11,9 @@ const usuarioRoutes = require("./routes/usuario_routes");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 1. Inicialização do banco SQLite
+// 1. Inicialização do banco SQLite e seed
 inicializarBanco();
+seed();
 
 // 2. Middlewares globais (antes das rotas)
 app.use(cors());

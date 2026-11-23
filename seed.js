@@ -45,4 +45,10 @@ function seed() {
     console.log("Seed concluído: 3 usuários iniciais criados (Senha padrão: 123456).");
 }
 
-seed();
+// Executa apenas se chamado diretamente pelo terminal (npm run seed)
+if (require.main === module) {
+    seed();
+}
+
+module.exports = seed;
+
